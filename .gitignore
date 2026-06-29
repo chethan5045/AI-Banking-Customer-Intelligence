@@ -6,3 +6,4 @@ __pycache__/
 .cache/
 part1/data/raw/
 part1/.cache/
+part2/.cache/

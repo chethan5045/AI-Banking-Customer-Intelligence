@@ -1,0 +1,7 @@
+{
+  "samples_requested": 500,
+  "samples_used": 500,
+  "mean_auc_difference": 7.614654915373276e-06,
+  "ci_2_5_percentile": -0.0003175486983608533,
+  "ci_97_5_percentile": 0.00032371299249946405
+}
