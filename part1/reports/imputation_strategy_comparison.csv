@@ -1,0 +1,3 @@
+column,skewness,mean_before_imputation,median_before_imputation,missing_before
+previous,41.84645447266293,0.5803233726305546,0.0,0
+balance,8.360308326166326,1362.2720576850766,448.0,0
