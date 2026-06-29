@@ -1,0 +1,3 @@
+model,removed_features,feature_count,test_auc
+Random Forest full features,,58,0.9155410724030051
+Random Forest reduced features,"job_housemaid, job_entrepreneur, day_31, default_yes, job_missing",53,0.91686538914529

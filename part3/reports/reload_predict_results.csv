@@ -1,0 +1,3 @@
+age,job,marital,education,default,housing,loan,contact,day,month,duration,campaign,pdays,previous,poutcome,predicted_class,yes_probability
+35,management,single,tertiary,no,no,no,cellular,15,may,320,1,-1,0,missing,0,0.435
+52,blue-collar,married,secondary,no,yes,yes,missing,5,may,80,4,-1,0,missing,0,0.0

@@ -1,0 +1,10 @@
+{
+  "best_params": {
+    "model__max_depth": null,
+    "model__min_samples_leaf": 1,
+    "model__n_estimators": 200
+  },
+  "best_cv_auc": 0.9257980733287132,
+  "total_configurations": 18,
+  "total_model_fits": 90
+}
