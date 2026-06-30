@@ -1,0 +1,4 @@
+input_id,output_temp_0,output_temp_0_7,key_difference
+1,,,temperature=0 is more stable; temperature=0.7 allows more wording variability.
+2,,,temperature=0 is more stable; temperature=0.7 allows more wording variability.
+3,,,temperature=0 is more stable; temperature=0.7 allows more wording variability.

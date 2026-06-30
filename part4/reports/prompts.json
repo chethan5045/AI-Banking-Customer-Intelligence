@@ -1,0 +1,37 @@
+{
+  "system_prompt": "You are a careful banking model explanation assistant.\nReturn only valid JSON. Do not include markdown, prose outside JSON, or extra keys.\nExplain the model output using the supplied feature values, predicted class, and predicted probability.\nDo not claim causal certainty. Avoid protected-class or personal-identity reasoning.\nUse concise business language suitable for a bank marketing team.",
+  "user_prompt_template": "Feature values:\n{feature_values}\n\nModel prediction:\n- predicted_class: {predicted_class}\n- predicted_probability_yes: {predicted_probability_yes}\n\nReturn JSON with exactly these fields:\n- prediction_label: string\n- confidence_level: one of low, medium, high\n- top_reason: string\n- second_reason: string\n- next_step: string",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "prediction_label": {
+        "type": "string"
+      },
+      "confidence_level": {
+        "type": "string",
+        "enum": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+      "top_reason": {
+        "type": "string"
+      },
+      "second_reason": {
+        "type": "string"
+      },
+      "next_step": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "prediction_label",
+      "confidence_level",
+      "top_reason",
+      "second_reason",
+      "next_step"
+    ],
+    "additionalProperties": false
+  }
+}

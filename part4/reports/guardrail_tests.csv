@@ -1,0 +1,3 @@
+input,guardrail_result,response
+Please explain this clean model prediction with no personal contact information.,passed,
+Please explain this prediction for customer email alex@example.com.,blocked,
