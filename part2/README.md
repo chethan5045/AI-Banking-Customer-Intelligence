@@ -1,5 +1,11 @@
 # Part 2 - Supervised Machine Learning Model
 
+## Overview
+
+In this part of the project, I used the cleaned dataset created in Part 1 to build and evaluate two supervised machine learning models.
+The first model predicts a customer's account balance using a regression approach, while the second predicts whether a customer is likely to subscribe to a term deposit using binary classification.
+To ensure fair model training, the feature set excludes both the balance and y columns, preventing target leakage.
+
 ## Goal
 
 This part uses `part1/cleaned_data.csv` to build and evaluate:
@@ -9,7 +15,7 @@ This part uses `part1/cleaned_data.csv` to build and evaluate:
 
 The shared feature matrix `X` uses all columns except `balance` and `y`. This avoids leaking either target into the feature set.
 
-## How to Run
+## Running the project
 
 From the repository root:
 
@@ -18,13 +24,13 @@ pip install -r requirements.txt
 python3 part2/train_evaluate_models.py
 ```
 
-The script creates:
+The dataset creates:
 
 - `part2/plots/roc_curve_logistic_regression.png`
 - metric CSV files in `part2/reports/`
 - trained `.joblib` model pipelines in `part2/models/`
 
-## Labels
+## Labels Target Variables
 
 Regression label:
 
@@ -42,14 +48,14 @@ y_clf = (df["y"] == "yes").astype(int)
 
 ## Encoding and Scaling
 
-The script uses a scikit-learn `Pipeline` with a `ColumnTransformer`.
+The dataset uses a scikit-learn `Pipeline` with a `ColumnTransformer`.
 
 Ordinal encoding is used for:
 
 - `education`: `missing < primary < secondary < tertiary`
 - `month`: `jan < feb < ... < dec`
 
-These columns have a natural order. For unordered categorical columns such as `job`, `marital`, `contact`, `poutcome`, and `day`, the script uses one-hot encoding with `drop="first"` to reduce multicollinearity. One-hot encoding avoids creating a false ordinal relationship, for example pretending that one job category is numerically greater than another.
+These columns have a natural order. For unordered categorical columns such as `job`, `marital`, `contact`, `poutcome`, and `day`, the dataset uses one-hot encoding with `drop="first"` to reduce multicollinearity. One-hot encoding avoids creating a false ordinal relationship, for example pretending that one job category is numerically greater than another.
 
 `StandardScaler` is fit only inside the training pipeline. Fitting the scaler on the full dataset would be data leakage because the scaler would learn test-set means and standard deviations before model evaluation.
 
@@ -141,7 +147,7 @@ In logistic regression, `C` controls inverse regularization strength. Smaller `C
 
 ## Bootstrap AUC Difference
 
-The script drew 500 bootstrap samples from the test set and computed:
+The dataset drew 500 bootstrap samples from the test set and computed:
 
 ```text
 AUC difference = AUC(C=1.0) - AUC(C=0.01)
@@ -155,9 +161,9 @@ Results:
 
 The confidence interval includes zero, so the AUC difference is not reliable. There is no evidence that `C=1.0` consistently outperforms `C=0.01` on this test set.
 
-## Files Produced
+## Project Outputs
 
-- `train_evaluate_models.py`: full preprocessing, training, and evaluation script
+- `train_evaluate_models.py`: full preprocessing, training, and evaluation dataset
 - `plots/roc_curve_logistic_regression.png`: ROC curve with AUC annotation
 - `reports/`: regression, classification, threshold, coefficient, and bootstrap results
 - `models/`: saved trained pipelines
