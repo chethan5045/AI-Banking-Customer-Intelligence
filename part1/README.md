@@ -5,17 +5,18 @@
 This phase focuses on preparing the dataset for machine learning by collecting the data, cleaning it, performing exploratory analysis, and generating visualizations. The processed dataset created in this stage serves as the foundation for all subsequent parts of the project.
 
 The project uses the UCI Bank Marketing dataset, which contains customer demographic information, previous marketing campaign details, and the target variable indicating whether a customer subscribed to a term deposit.
+
 ## Dataset
 
-This part uses the public UCI Bank Marketing dataset.
+The dataset was obtained from the UCI Machine Learning Repository.
 
 - Source: UCI Machine Learning Repository, Bank Marketing dataset
-- Download URL used by the Dataset : `https://archive.ics.uci.edu/static/public/222/bank+marketing.zip`
+- Download URL used by the dataset : `https://archive.ics.uci.edu/static/public/222/bank+marketing.zip`
 - File used: `bank-full.csv`
 - Original shape: 45,211 rows and 17 columns
 - Target for later parts: `y`, whether a customer subscribed to a term deposit
 
-The Dataset downloads the raw dataset into `part1/data/raw/`. That raw folder is ignored by Git because the Dataset documents and reproduces the download. The cleaned dataset is saved as `part1/cleaned_data.csv`.
+The raw dataset is stored inside `part1/data/raw/`, while the cleaned version is saved as `part1/cleaned_data.csv`. The raw data directory is excluded from Git because the dataset can be downloaded again whenever the project is executed.
 
 ## Running the Project
 
@@ -25,6 +26,7 @@ From the repository root:
 pip install -r requirements.txt
 python3 part1/eda_bank_marketing.py
 ```
+
 ## Loading and Initial Inspection
 
 The data is loaded with:
@@ -33,7 +35,7 @@ The data is loaded with:
 pd.read_csv(RAW_CSV_PATH, sep=";")
 ```
 
-The script prints:
+The Data prints:
 
 - First five rows
 - Column data types
@@ -43,7 +45,7 @@ The original shape is `(45211, 17)`.
 
 ## Null Value Analysis
 
-The UCI dataset uses the string `unknown` for missing categorical information. The script converts `unknown` to null values for reporting.
+The UCI dataset uses the string `unknown` for missing categorical information. The dataset converts `unknown` to null values for reporting.
 
 Columns above 20% missing:
 
@@ -118,7 +120,7 @@ I will retain these outliers for Part 2 because high balances and long call dura
 
 ## Required Visualizations
 
-The script saves all required plots using `plt.savefig()`.
+The Dataset saves all required plots using `plt.savefig()`.
 
 | Plot | File | Interpretation |
 | --- | --- | --- |
