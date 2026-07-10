@@ -121,8 +121,6 @@ def call_llm(
         return None
     return response.json()["choices"][0]["message"]["content"]
 
-    api_key = os.environ.get("LLM_API_KEY")
-
 def guarded_call_llm(
     system_prompt: str,
     user_prompt: str,
