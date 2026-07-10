@@ -110,7 +110,7 @@ def corr_difference_table(pearson: pd.DataFrame, spearman: pd.DataFrame) -> pd.D
             )
     return pd.DataFrame(rows).sort_values("abs_difference", ascending=False)
 
-
+# Visualizations
 def save_plots(df: pd.DataFrame, numeric_cols: list[str], most_skewed_col: str) -> None:
     sns.set_theme(style="whitegrid")
 
@@ -168,11 +168,12 @@ def save_plots(df: pd.DataFrame, numeric_cols: list[str], most_skewed_col: str) 
     plt.savefig(PLOTS_DIR / "06_correlation_heatmap.png", dpi=150)
     plt.close()
 
-
+# Main Wrokflow
 def main() -> None:
     ensure_dirs()
     download_dataset()
-
+    
+    # Load the dataset
     print_section("1. Load the dataset")
     df = pd.read_csv(RAW_CSV_PATH, sep=";")
     print("First five rows:")
@@ -184,7 +185,8 @@ def main() -> None:
     # UCI uses the string "unknown" for missing categorical information.
     categorical_cols = df.select_dtypes(include=["object", "string"]).columns.tolist()
     df = df.replace({"unknown": pd.NA})
-
+    
+    # Null value analysis:
     print_section("2. Null value analysis")
     null_before = missing_table(df)
     print(null_before)
@@ -196,7 +198,8 @@ def main() -> None:
     for col in numeric_cols_initial:
         if 0 < df[col].isnull().mean() <= 0.20:
             df[col] = df[col].fillna(df[col].median())
-
+            
+    # Duplicate detection and removal:
     print_section("3. Duplicate detection and removal")
     duplicate_count = df.duplicated().sum()
     print(f"Duplicate rows before removal: {duplicate_count}")
@@ -211,6 +214,7 @@ def main() -> None:
         if col in df.columns and df[col].isnull().sum() > 0:
             df[col] = df[col].fillna("missing")
 
+    # Data type correction
     print_section("4. Data type correction")
     memory_before = df.memory_usage(deep=True).sum()
     print(f"Memory before type correction: {memory_before} bytes")
@@ -226,6 +230,7 @@ def main() -> None:
     print("\nCorrected dtypes:")
     print(df.dtypes)
 
+    # Descriptive statistics
     print_section("5. Descriptive statistics and skewness")
     numeric_cols = df.select_dtypes(include="number").columns.tolist()
     descriptive_stats = df[numeric_cols].describe()
@@ -237,18 +242,21 @@ def main() -> None:
     save_table(skewness.to_frame("skewness"), "skewness")
     most_skewed_col = skewness.abs().idxmax()
     print(f"\nHighest absolute skewness column: {most_skewed_col} ({skewness.loc[most_skewed_col]:.4f})")
-
+    
+    # Outlier detection with IQR
     print_section("6. Outlier detection with IQR")
     outlier_cols = ["balance", "duration"]
     outliers = outlier_summary(df, outlier_cols)
     print(outliers)
     save_table(outliers.set_index("column"), "outlier_summary")
-
+    
+    # Visualizations 
     print_section("7. Visualizations")
     save_plots(df, numeric_cols, most_skewed_col)
     for plot_path in sorted(PLOTS_DIR.glob("*.png")):
         print(f"Saved {plot_path}")
 
+    # Correlation heat map
     print_section("8. Correlation heat map")
     pearson_corr = df[numeric_cols].corr()
     print(pearson_corr)
@@ -256,6 +264,7 @@ def main() -> None:
     corr_a, corr_b, corr_value = strongest_corr_pair(pearson_corr)
     print(f"\nHighest absolute Pearson correlation pair: {corr_a} and {corr_b} ({corr_value:.4f})")
 
+    # Imputation strategy comparison
     print_section("9a. Imputation strategy comparison")
     top_two_skewed = skewness.abs().head(2).index.tolist()
     imputation_rows = []
@@ -277,6 +286,7 @@ def main() -> None:
     print(df[top_two_skewed].isnull().sum())
     save_table(imputation_comparison.set_index("column"), "imputation_strategy_comparison")
 
+    # Spearman rank correlation
     print_section("9b. Spearman rank correlation")
     spearman_corr = df[numeric_cols].corr(method="spearman")
     corr_diff = corr_difference_table(pearson_corr, spearman_corr)
@@ -287,6 +297,7 @@ def main() -> None:
     save_table(spearman_corr, "spearman_correlation")
     save_table(corr_diff, "correlation_difference")
 
+    # Groubed aggregation 
     print_section("9c. Grouped aggregation")
     grouped = df.groupby("job", observed=True)["balance"].agg(["mean", "std", "count"]).sort_values("mean", ascending=False)
     print(grouped)
@@ -298,6 +309,7 @@ def main() -> None:
     print(f"Highest std group: {highest_std_group}")
     print(f"Highest-to-lowest group mean ratio: {mean_ratio:.2f}")
 
+    # Save clean dataset
     print_section("10. Save clean dataset")
     df.to_csv(CLEANED_PATH, index=False)
     print(f"Cleaned data saved to {CLEANED_PATH}")
