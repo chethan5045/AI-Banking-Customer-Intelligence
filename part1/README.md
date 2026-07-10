@@ -1,18 +1,23 @@
 # Part 1 - Data Acquisition, Cleaning, and Exploratory Analysis
 
+# Overview
+
+This phase focuses on preparing the dataset for machine learning by collecting the data, cleaning it, performing exploratory analysis, and generating visualizations. The processed dataset created in this stage serves as the foundation for all subsequent parts of the project.
+
+The project uses the UCI Bank Marketing dataset, which contains customer demographic information, previous marketing campaign details, and the target variable indicating whether a customer subscribed to a term deposit.
 ## Dataset
 
 This part uses the public UCI Bank Marketing dataset.
 
 - Source: UCI Machine Learning Repository, Bank Marketing dataset
-- Download URL used by the script: `https://archive.ics.uci.edu/static/public/222/bank+marketing.zip`
+- Download URL used by the Dataset : `https://archive.ics.uci.edu/static/public/222/bank+marketing.zip`
 - File used: `bank-full.csv`
 - Original shape: 45,211 rows and 17 columns
 - Target for later parts: `y`, whether a customer subscribed to a term deposit
 
-The script downloads the raw dataset into `part1/data/raw/`. That raw folder is ignored by Git because the script documents and reproduces the download. The cleaned dataset is saved as `part1/cleaned_data.csv`.
+The Dataset downloads the raw dataset into `part1/data/raw/`. That raw folder is ignored by Git because the Dataset documents and reproduces the download. The cleaned dataset is saved as `part1/cleaned_data.csv`.
 
-## How to Run
+## Running the Project
 
 From the repository root:
 
@@ -20,18 +25,6 @@ From the repository root:
 pip install -r requirements.txt
 python3 part1/eda_bank_marketing.py
 ```
-
-The script prints the required analysis and creates:
-
-- `part1/cleaned_data.csv`
-- `part1/plots/01_line_balance.png`
-- `part1/plots/02_bar_mean_balance_by_job.png`
-- `part1/plots/03_histogram_most_skewed.png`
-- `part1/plots/04_scatter_duration_campaign.png`
-- `part1/plots/05_box_duration_by_target.png`
-- `part1/plots/06_correlation_heatmap.png`
-- CSV report tables in `part1/reports/`
-
 ## Loading and Initial Inspection
 
 The data is loaded with:
