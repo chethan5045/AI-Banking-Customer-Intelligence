@@ -1,6 +1,6 @@
 # Part 1 - Data Acquisition, Cleaning, and Exploratory Analysis
 
-# Overview
+## Overview
 
 This phase focuses on preparing the dataset for machine learning by collecting the data, cleaning it, performing exploratory analysis, and generating visualizations. The processed dataset created in this stage serves as the foundation for all subsequent parts of the project.
 
