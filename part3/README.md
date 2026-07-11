@@ -1,5 +1,10 @@
 # Part 3 - Advanced Modeling, Ensembles, Tuning, and Full ML Pipeline
 
+##Overview
+
+In this stage of the project, I expanded the classification model developed in Part 2 by experimenting with multiple machine learning algorithms and optimization techniques. The primary objective was to improve prediction performance while building a reusable production-style pipeline.
+The target variable remains y, where a value of 1 represents customers who subscribed to a term deposit and 0 represents those who did not.
+
 ## Goal
 
 This part extends the Part 2 classification work. The target remains:
@@ -10,7 +15,7 @@ y = (df["y"] == "yes").astype(int)
 
 The task is to compare decision trees, ensemble models, cross-validation, hyperparameter tuning, feature ablation, a manual learning curve, and a serialized production-style sklearn pipeline.
 
-## How to Run
+## Running the program 
 
 From the repository root:
 
@@ -19,7 +24,7 @@ pip install -r requirements.txt
 python3 part3/advanced_modeling_pipeline.py
 ```
 
-The script creates:
+The dataset creates:
 
 - `part3/best_model.pkl`
 - `part3/models/best_model.pkl`
@@ -192,7 +197,7 @@ Training AUC stays at 1.0, which indicates the tuned Random Forest can memorize 
 
 ## Reload and Predict
 
-The script verifies that the saved model can be loaded and used for prediction:
+The dataset verifies that the saved model can be loaded and used for prediction:
 
 ```python
 import joblib
